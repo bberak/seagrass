@@ -2,13 +2,15 @@ import { THREE } from "expo-three";
 import { screen, remap } from "../utils";
 import { noise } from "../utils/perlin";
 
-export default () => {
+export default ({ zoom = 0}) => {
 	const camera = new THREE.PerspectiveCamera(
 		90,
 		screen.width / screen.height,
-		1,
+		0.1,
 		1000
 	);
+
+	camera.zoom = zoom
 
 	const lookAt = camera.lookAt;
 

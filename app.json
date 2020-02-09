@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "React Native Game Engine Template",
-    "slug": "react-native-game-engine-template",
+    "name": "Seagrass",
+    "slug": "seagress",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": ["ios", "android"],

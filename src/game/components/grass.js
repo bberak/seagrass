@@ -34,7 +34,6 @@ export default ({
 			materials.push(
 				new Material({
 					side: THREE.DoubleSide,
-					seed: 12.4,
 					color: 0x2fae75
 				})
 			);

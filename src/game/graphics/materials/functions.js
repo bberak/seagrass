@@ -11,6 +11,16 @@ float noise(vec3 P) { vec3 Pi0 = floor(P); vec3 Pi1 = Pi0 + vec3(1.0); Pi0 = mod
 
 THREE.ShaderChunk.noise = noise;
 
+const remap = 
+`
+float remap(float n, float start1, float stop1, float start2, float stop2) {
+	return (n - start1) / (stop1 - start1) * (stop2 - start2) + start2; 
+}
+`
+
+THREE.ShaderChunk.remap = remap;
+
 module.exports = {
-	noise
+	noise,
+	remap
 }

@@ -9,5 +9,12 @@ export default [
 	Camera({ pitchSpeed: -0.01, yawSpeed: 0.01 }),
 	Particles,
 	Rotation,
-	Timeline
+	Timeline, 
+	(entities, { touches }) => {
+
+		if (touches.find(x => x.type === "start"))
+			entities.grass.model.position.z -= 0.1
+
+		return entities;
+	}
 ];

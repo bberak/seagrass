@@ -8,9 +8,8 @@ import { getHashCode } from "../../utils";
 const GrassMaterial = (
 	{
 		time = 0.0,
-		speed = new THREE.Vector3(1, 0, 0),
-		seed = 0.5,
-		effectiveness = 0.01,
+		speed = 0.25,
+		seed = 1.618,
 		...rest
 	},
 	Material = THREE.MeshPhongMaterial
@@ -36,18 +35,21 @@ const GrassMaterial = (
 			float tx = modelMatrix[3][0];
 			float ty = modelMatrix[3][1];
 			float tz = modelMatrix[3][2];
-			vec3 offset = vec3(position.x + tx, 0, 0);
-	  		float displacement = noise(seed + offset + vec3(speed * time));
-			transformed = vec3(1, 0, 0) * vec3(displacement) + position;
+			vec3 offset = vec3(position.x + tx, position.y + tz, time * speed);
+	  		float dx = noise(seed + offset);
+			transformed = vec3(dx, 0, 0) + position;
 
-            vec4 mvPosition = modelViewMatrix * vec4(transformed, 1.0);
+			//transformed.x = hyp * cos(theta);
+			//transformed.y = hyp * sin(theta);
+
+            vec4 mvPosition  = modelViewMatrix * vec4(transformed, 1.0);
 			gl_Position = projectionMatrix * mvPosition;
 		`;
 
 		shader.vertexShader = `
 			#include <noise>
 			uniform float time;
-			uniform vec3 speed;
+			uniform float speed;
 			uniform float seed;
 			
 			${shader.vertexShader.replace("#include <project_vertex>", noiseChunk)}

@@ -1,6 +1,6 @@
 import { THREE } from "expo-three";
 import { add } from "../utils/three";
-import Material from "../graphics/materials/anemone.js";
+import Material from "../graphics/materials/grass.js";
 
 export default ({
 	parent,
@@ -34,18 +34,8 @@ export default ({
 			materials.push(
 				new Material({
 					side: THREE.DoubleSide,
-					terrainHeight: 1.0,
-					terrainSeed: 12.4,
-					color: 0xd8754f,
-					meshHeight: 1,
-					displacementScale: new THREE.Vector3(0, 1, 0),
-					effectiveness: 1.51,
-					offsetExpressions: {
-						x: "position.x + tx",
-						y: "2",
-						z: "position.z + tz"
-					},
-					displacementScale: new THREE.Vector3(1, 1, 0)
+					seed: 12.4,
+					color: 0x2fae75
 				})
 			);
 		}
@@ -61,6 +51,11 @@ export default ({
 	grass.scale.z = scale;
 
 	add(parent, grass);
+
+	grass.onBeforeRender = (renderer, scene, camera, geometry, material) => {
+		if (material.onBeforeRender)
+			material.onBeforeRender();
+	}
 
 	return {
 		model: grass,

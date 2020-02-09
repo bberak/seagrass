@@ -9,8 +9,8 @@ const camera = Camera({ zoom: 3 });
 export default async () => {
 	clear(scene);
 
-	const ambient = new THREE.AmbientLight(0xffffff, 1);
-	const sunlight = new THREE.DirectionalLight(0xffffff, 0.95);
+	const ambient = new THREE.AmbientLight(0xffffff, 0.8);
+	const sunlight = new THREE.DirectionalLight(0xffffff, 0.65);
 
     sunlight.position.set(0, 50, 50);
 

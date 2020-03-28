@@ -24,9 +24,9 @@ import { screen } from "../../utils";
 
 const UnrealBloomPass = function(
 	resolution = new Vector2(screen.width, screen.height),
-	strength = 2,
+	strength = 0.75,
 	radius = 0.75,
-	threshold = 0
+	threshold = 0.9
 ) {
 	Pass.call(this);
 

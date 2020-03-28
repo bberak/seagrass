@@ -23,7 +23,7 @@ export default async () => {
 	const entities = {
 		scene,
 		camera,
-		grass: Grass({ parent: scene })
+		grass: await Grass({ parent: scene })
 	}
 
 	return entities;

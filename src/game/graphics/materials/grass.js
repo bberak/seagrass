@@ -12,7 +12,7 @@ const GrassMaterial = (
 		seed = 1.618,
 		...rest
 	},
-	Material = THREE.MeshPhongMaterial
+	Material = THREE.MeshStandardMaterial
 ) => {
 	const material = new Material(rest);
 

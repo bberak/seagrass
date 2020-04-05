@@ -2,6 +2,7 @@ import ExpoTHREE, { THREE } from "expo-three";
 import { add } from "../utils/three";
 import Material from "../graphics/materials/grass.js";
 import SeagrassTexture from "../../assets/textures/seagrass.png";
+import SeagrassNormalTexture from "../../assets/textures/seagrass-normal.png";
 
 export default async ({
 	parent,
@@ -15,6 +16,7 @@ export default async ({
 	color = 0x00e6ff
 }) => {
 	const texture = await ExpoTHREE.loadAsync(SeagrassTexture);
+	const normalTexture = await ExpoTHREE.loadAsync(SeagrassNormalTexture);
 	const geo = new THREE.Geometry();
 	const materials = [];
 
@@ -29,7 +31,7 @@ export default async ({
 			plane.position.x = x;
 			plane.position.y = y;
 			plane.rotation.x = Math.PI * -0.6;
-			plane.rotation.y = x / 2 + Math.random() * 0.3;
+			//plane.rotation.y = x / 2 + Math.random() * 0.3;
 			plane.updateMatrix();
 			geo.merge(plane.geometry, plane.matrix);
 
@@ -37,7 +39,8 @@ export default async ({
 				new Material({
 					side: THREE.DoubleSide,
 					transparent: true,
-					map: texture
+					map: texture,
+					normalMap: normalTexture
 				})
 			);
 		}

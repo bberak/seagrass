@@ -10,15 +10,14 @@ export default async ({
 	height = 6,
 	strandWidth = 0.1,
 	strandHeight = 0.3,
-	gapWidth = 0.06,
-	gapHeight = 0.12,
+	gapWidth = 0.12,
+	gapHeight = 0.24,
 	scale = 1,
 	color = 0x00e6ff
 }) => {
 	const texture = await ExpoTHREE.loadAsync(SeagrassTexture);
 	const normalTexture = await ExpoTHREE.loadAsync(SeagrassNormalTexture);
 	const geo = new THREE.Geometry();
-	const materials = [];
 
 	for (var y = 0; y < height; y += gapHeight) {
 		for (var x = 0; x < width; x += gapWidth) {
@@ -31,23 +30,20 @@ export default async ({
 			plane.position.x = x;
 			plane.position.y = y;
 			plane.rotation.x = Math.PI * -0.6;
-			//plane.rotation.y = x / 2 + Math.random() * 0.3;
 			plane.updateMatrix();
 			geo.merge(plane.geometry, plane.matrix);
-
-			materials.push(
-				new Material({
-					side: THREE.DoubleSide,
-					transparent: true,
-					map: texture,
-					normalMap: normalTexture
-				})
-			);
 		}
 	}
 
-	const grass = new THREE.Mesh(geo, materials);
-
+	const grass = new THREE.Mesh(
+		geo,
+		new Material({
+			side: THREE.FrontSide,
+			transparent: false,
+			map: texture,
+			normalMap: normalTexture,
+		})
+	);
 	grass.position.x = width * -0.5;
 	grass.position.z = width * -0.5;
 	grass.rotation.x = Math.PI * 0.5;
